@@ -7,7 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins '*'
+    ## origins '*'
+    if Rails.env.production?
+        origins 'https://qiita-todo-3584d.firebaseapp.com/'
+    else
+        origins 'http://localhost:3000'
+    end
 
     resource '*',
       headers: :any,
